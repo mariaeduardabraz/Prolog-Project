@@ -26,9 +26,9 @@ filme('Gladiator', [acao, aventura, drama], [epico]).
 
 % Regras para recomendar filmes com base nas preferências
 recomendar(Genero, Estilo, Filme) :-
-    filme(Filme, Generos, Estilos),
-    member(Genero, Generos),
-    member(Estilo, Estilos).
+    filme(Filme, Generos, Estilos), % verifica se existe um filme na base de dados de filmes com o nome Filme e se esse filme possui os gêneros Generos e os estilos Estilos
+    member(Genero, Generos), % verifica se o gênero Genero está presente na lista de gêneros Generos do filme.
+    member(Estilo, Estilos). % verifica se o estilo Estilo está presente na lista de estilos Estilos do filme
 
 % Adicionar cabeçalhos CORS manualmente
 add_cors_headers(_Request) :-
@@ -36,6 +36,7 @@ add_cors_headers(_Request) :-
     format('Access-Control-Allow-Methods: POST, GET, OPTIONS~n'),
     format('Access-Control-Allow-Headers: Content-Type~n').
 
+% % Realiza as requisições e processa a recomendação
 handle_recomendacao(options, Request) :-
     add_cors_headers(Request),
     format('Content-type: text/plain~n~n'),
